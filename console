@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+use Psr\Container\ContainerInterface;
+use Silly\Edition\PhpDi\Application;
+use Pho\Console\ConsoleProgram;
+use Pho\ServiceProvider\ConsoleServiceProvider;
+use Symfony\Component\Console\Output\OutputInterface;
+use App\Console\HelloCommand;
+use Pho\Console\ConsoleKernel;
+use App\Console\Kernel;
+use function DI\autowire;
+
+$app = require __DIR__.'/bootstrap/load.php';
+
+$app->register(new ConsoleServiceProvider(), [
+    ConsoleKernel::class => autowire(Kernel::class)->method('commands'),
+]);
+
+$app->run(ConsoleProgram::class);
