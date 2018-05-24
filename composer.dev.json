@@ -1,7 +1,8 @@
 {
     "name": "pho/framework",
     "description": "Good enough web framework.",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "license": "MIT",
     "type": "project",
     "authors": [
@@ -10,10 +11,17 @@
         "email": "khanhicetea@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../pho",
+            "symlink": true
+        }
+    ],
     "require": {
         "php": ">=7.1",
         "vlucas/phpdotenv": "^2.4",
-        "pho/pho": "^1.0"
+        "pho/pho": "*"
     },
     "autoload": {
         "psr-4": {
