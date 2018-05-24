@@ -11,18 +11,21 @@ $application->register(new Pho\ServiceProvider\LogServiceProvider(), [
 ]);
 $application->register(new Pho\ServiceProvider\TwigServiceProvider(), [
     'twig.path' => resources_path('views'),
+    'twig.options' => [
+        'cache' => env('TWIG_CACHE', false) ? storage_path(env('TWIG_CACHE')) : false,
+    ]
 ]);
 $application->register(new Pho\ServiceProvider\RedisServiceProvider());
 $application->register(new Pho\ServiceProvider\EloquentServiceProvider(), [
     'db.connection' => [
-        'driver' => 'mysql',
-        'host' => '127.0.0.1',
-        'database' => 'ezweb_website',
-        'username' => 'root',
-        'password' => 'passwd',
-        'charset' => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix' => null,
+        'driver' => env('DB_DRIVER', 'mysql'),
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'database' => env('DB_NAME', 'test'),
+        'username' => env('DB_USER', 'root'),
+        'password' => env('DB_PASSWORD', ''),
+        'charset' => env('DB_CHARSET', 'utf8mb4'),
+        'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+        'prefix' => env('DB_PREFIX', null),
     ],
 ]);
 return $application;

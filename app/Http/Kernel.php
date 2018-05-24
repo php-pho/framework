@@ -8,4 +8,8 @@ class Kernel extends PhoKernel {
     public function stacks() {
 
     }
+
+    public function events() {
+
+    }
 }

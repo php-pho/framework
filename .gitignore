@@ -134,6 +134,8 @@ $RECYCLE.BIN/
 # Pho Framework
 .env*
 !.env.dist
-storage/logs/**
-!storage/logs/.gitkeep
+storage/log/**
+!storage/log/.gitkeep
+storage/cache/**
+!storage/cache/.gitkeep
 
