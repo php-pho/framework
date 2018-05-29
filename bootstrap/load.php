@@ -6,16 +6,29 @@ $dotenv = new Dotenv\Dotenv(dirname(__DIR__));
 $dotenv->load();
 
 $application = (require_once dirname(__FILE__).'/application.php');
-$application->register(new Pho\ServiceProvider\LogServiceProvider(), [
-    'logger.stream' => storage_path('logs/pho.log'),
+
+// Pho
+$application->register(new Pho\ServiceProvider\PhoServiceProvider(), [
+    'DEBUG' => env('DEBUG', false),
 ]);
+
+// Log
+$application->register(new Pho\ServiceProvider\LogServiceProvider(), [
+    'logger.stream' => storage_path('log/pho.log'),
+]);
+
+// Twig
 $application->register(new Pho\ServiceProvider\TwigServiceProvider(), [
     'twig.path' => resources_path('views'),
     'twig.options' => [
         'cache' => env('TWIG_CACHE', false) ? storage_path(env('TWIG_CACHE')) : false,
     ]
 ]);
+
+// Redis
 $application->register(new Pho\ServiceProvider\RedisServiceProvider());
+
+// Eloquent
 $application->register(new Pho\ServiceProvider\EloquentServiceProvider(), [
     'db.connection' => [
         'driver' => env('DB_DRIVER', 'mysql'),
@@ -28,4 +41,5 @@ $application->register(new Pho\ServiceProvider\EloquentServiceProvider(), [
         'prefix' => env('DB_PREFIX', null),
     ],
 ]);
+
 return $application;
