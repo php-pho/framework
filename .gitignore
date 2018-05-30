@@ -133,6 +133,7 @@ $RECYCLE.BIN/
 
 # Dev environment
 composer.dev.json
+composer.dev.lock
 
 # Pho Framework
 .env*

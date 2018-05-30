@@ -3,7 +3,8 @@ namespace App\Console;
 
 use Pho\Console\ConsoleKernel;
 
-class Kernel extends ConsoleKernel {
+class Kernel extends ConsoleKernel
+{
     public function commands()
     {
         $this->command('hello [name]', HelloCommand::class);
