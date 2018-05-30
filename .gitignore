@@ -131,6 +131,9 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/code,macos,linux,windows,phpstorm,composer
 
+# Dev environment
+composer.dev.json
+
 # Pho Framework
 .env*
 !.env.dist

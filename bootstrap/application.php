@@ -2,5 +2,11 @@
 use Pho\Core\Application;
 use Pho\Core\ContainerBuilderFactory;
 
-$app = new Application(ContainerBuilderFactory::development());
+if (env('APP_ENV', 'dev') == 'dev') {
+    $containerBuilder = ContainerBuilderFactory::development();
+} else {
+    $containerBuilder = ContainerBuilderFactory::production(true, true, storage_path('cache'), storage_path('cache'));
+}
+
+$app = new Application($containerBuilder);
 return $app;
