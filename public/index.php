@@ -10,4 +10,5 @@ $app->register(new HttpServiceProvider(), [
     Pho\Routing\Router::class => autowire(App\Http\Routing::class)->method('routes'),
 ]);
 $app->register(new SessionServiceProvider());
+$pho_container = $app->buildContainer();
 $app->run(HttpProgram::class);

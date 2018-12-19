@@ -55,3 +55,12 @@ if (!function_exists('env')) {
         return $value;
     }
 }
+
+if (function_exists('c')) {
+    throw new Exception('function "c" is already existed !');
+} else {
+    function c(string $key = null) {
+        global $pho_container;
+        return is_null($key) ? $pho_container : $pho_container->get($key);
+    }
+}
