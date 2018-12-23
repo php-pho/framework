@@ -14,7 +14,7 @@
     "require": {
         "php": ">=7.1",
         "vlucas/phpdotenv": "^2.4",
-        "pho/pho": "^1.0",
+        "pho/pho": "^2.0",
         "robmorgan/phinx": "^0.9"
     },
     "autoload": {
