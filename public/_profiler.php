@@ -1,4 +1,5 @@
 <?php
+
 if (function_exists('tideways_xhprof_enable')) {
     tideways_xhprof_enable();
 }

@@ -9,4 +9,3 @@ if (env('APP_ENV', 'dev') == 'dev') {
 }
 
 $app = new Application($containerBuilder);
-return $app;

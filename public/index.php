@@ -1,14 +1,9 @@
 <?php
-use function DI\autowire;
-use Pho\Http\HttpProgram;
-use Pho\ServiceProvider\HttpServiceProvider;
-use Pho\ServiceProvider\SessionServiceProvider;
 
-$app = require dirname(__DIR__).'/bootstrap/load.php';
-$app->register(new HttpServiceProvider(), [
-    Pho\Http\Kernel::class => autowire(App\Http\Kernel::class)->method('stacks')->method('events'),
-    Pho\Routing\RouteLoader::class => autowire(App\Http\Router::class),
-]);
-$app->register(new SessionServiceProvider());
+use Pho\Http\HttpProgram;
+
+require dirname(__DIR__).'/bootstrap/load.php';
+require dirname(__DIR__).'/bootstrap/http.php';
+
 $pho_container = $app->buildContainer();
 $app->run(HttpProgram::class);

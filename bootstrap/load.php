@@ -5,20 +5,20 @@ $autoloader = (require_once dirname(__DIR__).'/vendor/autoload.php');
 $dotenv = new Dotenv\Dotenv(dirname(__DIR__));
 $dotenv->load();
 
-$application = (require_once dirname(__FILE__).'/application.php');
+require dirname(__FILE__).'/app.php';
 
 // Pho
-$application->register(new Pho\ServiceProvider\PhoServiceProvider(), [
+$app->register(new Pho\ServiceProvider\PhoServiceProvider(), [
     'DEBUG' => env('DEBUG', false),
 ]);
 
 // Log
-$application->register(new Pho\ServiceProvider\LogServiceProvider(), [
+$app->register(new Pho\ServiceProvider\LogServiceProvider(), [
     'logger.stream' => storage_path('log/pho.log'),
 ]);
 
 // Twig
-$application->register(new Pho\ServiceProvider\TwigServiceProvider(), [
+$app->register(new Pho\ServiceProvider\TwigServiceProvider(), [
     'twig.path' => resources_path('views'),
     'twig.options' => [
         'cache' => env('TWIG_CACHE', false) ? storage_path(env('TWIG_CACHE')) : false,
@@ -26,10 +26,14 @@ $application->register(new Pho\ServiceProvider\TwigServiceProvider(), [
 ]);
 
 // Redis
-$application->register(new Pho\ServiceProvider\RedisServiceProvider());
+if (class_exists('Redis')) {
+    $app->register(new Pho\ServiceProvider\RedisServiceProvider());
+} else {
+    $app->register(new Pho\ServiceProvider\PredisServiceProvider());
+}
 
 // Eloquent
-$application->register(new Pho\ServiceProvider\EloquentServiceProvider(), [
+$app->register(new Pho\ServiceProvider\EloquentServiceProvider(), [
     'db.connection' => [
         'driver' => env('DB_DRIVER', 'mysql'),
         'host' => env('DB_HOST', '127.0.0.1'),
@@ -41,5 +45,3 @@ $application->register(new Pho\ServiceProvider\EloquentServiceProvider(), [
         'prefix' => env('DB_PREFIX', null),
     ],
 ]);
-
-return $application;
