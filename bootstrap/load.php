@@ -1,4 +1,7 @@
 <?php
+
+use App\ServiceProvider\WebsiteServiceProvider;
+
 require_once dirname(__FILE__).'/helpers.php';
 $autoloader = (require_once dirname(__DIR__).'/vendor/autoload.php');
 
@@ -44,4 +47,7 @@ $app->register(new Pho\ServiceProvider\EloquentServiceProvider(), [
         'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
         'prefix' => env('DB_PREFIX', null),
     ],
+]);
+
+$app->register(new WebsiteServiceProvider(), [
 ]);
