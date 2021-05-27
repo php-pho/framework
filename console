@@ -1,12 +1,20 @@
 #!/usr/bin/env php
 <?php
 
-define('CONTAINER_CACHE_DIR', 'cache/console');
+define('CONTAINER_CACHE_PATH', 'console');
 
 use Pho\Console\ConsoleProgram;
 
-require __DIR__ . '/bootstrap/load.php';
-require __DIR__ . '/bootstrap/console.php';
+require_once __DIR__ . '/bootstrap/helpers.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+define('CONTAINER_INCLUDES', [
+    __DIR__ . '/bootstrap/load.php',
+    __DIR__ . '/bootstrap/console.php',
+]);
+
+require_once __DIR__ . '/bootstrap/app.php';
 
 $pho_container = $app->buildContainer();
+
 $app->run(ConsoleProgram::class);
